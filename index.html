@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/checkbox.css">
+    <style>
+        #box{
+            position: absolute;
+            z-index: 10000;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.5);
+        }
+        #myDiagramDiv{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        z-index:9999;
+        width:1200px;
+        height:600px;
+        background-color: #DAE4E4;
+        }
+        .show{
+        height: auto;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+      <!-- 头部 -->
+      <div class="layui-header">
+        <div class="layui-logo"><a href="#"><i class="layui-icon layui-icon-home"></i>工程管理系统</a></div>
+        <ul class="layui-nav layui-layout-right">
+
+        </ul>
+      </div>
+      <!-- 左侧导航 -->
+      <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+          <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+          <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+              <a class="" href="javascript:;"><i class="layui-icon layui-icon-set-fill"></i>建立工程</a>
+              <dl class="layui-nav-child">
+                <dd><a href="javascript:;"><i class="layui-icon layui-icon-add-circle-fine"></i>新建项目</a></dd>
+                <dd><a href="javascript:;"><i class="layui-icon layui-icon-util"></i>修改项目</a></dd>
+                <dd><a href="javascript:;"><i class="layui-icon layui-icon-list"></i>已生成工程</a></dd>
+              </dl>
+            </li>
+            <li class="layui-nav-item">
+              <a href="javascript:;">解决方案</a>
+              <dl class="layui-nav-child">
+                <dd><a href="javascript:;">列表一</a></dd>
+                <dd><a href="javascript:;">列表二</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 主体内容 -->
+      <div class="main">
+        <!-- 第一部分 -->
+        <div class="layui-body active">
+          <!-- 内容主体区域 -->
+          <div style="padding: 15px;">
+            <div class="site-text">
+              <form class="layui-form layui-form-pane">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">工程名称</label>
+                  <div class="layui-input-block">
+                    <input id="proname" type="text" name="proname" required="" lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input layui-form-danger">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">工程编号</label>
+                  <div class="layui-input-inline">
+                    <input id="num" type="text" name="num" required="" lay-verify="required" placeholder="请输入项目编号" autocomplete="off" class="layui-input">
+                  </div>
+                  <div class="layui-form-mid layui-word-aux">辅助文字</div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                  <label class="layui-form-label">工程项目描述</label>
+                  <div class="layui-input-block">
+                    <textarea name="descript" required="required" placeholder="请输入描述内容" class="layui-textarea" id="descript" autocomplete="off"></textarea>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <span class="layui-btn" id="submit">立即提交</span>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div style="padding: 15px;">
+              <div class="layui-table-box" id="add_pro_form">
+                <div class="layui-table-header">
+                    <table cellspacing="0" cellpadding="0" border="0" class="layui-table" >
+                      <thead>
+                        <tr>
+                          <th>
+                            <div class="layui-table-cell" align="center">
+                              <span>工程名称</span>
+                            </div>
+                          </th>
+                          <th>
+                            <div class="layui-table-cell" align="center">
+                              <span>工程编号</span>
+                            </div>
+                          </th>
+                          <th>
+                            <div class="layui-table-cell" align="center">
+                              <span>描述</span>
+                            </div>
+                          </th>
+                          <th>
+                            <div class="layui-table-cell" align="center">
+                              <span>操作</span>
+                            </div>
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+                <table cellspacing="0" cellpadding="0" border="0" class="layui-table content">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div>
+                          --
+                        </div>
+                      </td>
+                      <td>
+                        <div>--</div>
+                      </td>
+                      <td>
+                        <div>
+                          --
+                        </div>
+                      </td>
+                      <td>
+                        <div >
+                            --
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- 编辑窗口 -->
+              <div id="edit_main" style="display: none;" lay-filter="edit_msg">
+                <form class="layui-form" id="edit_pro" >
+                  <div class="layui-form-item center" >
+                    <label class="layui-form-label" style="width: 100px" >工程名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="proname" required value="" style="width: 240px"  lay-verify="required" placeholder="输入修改的项目名称" autocomplete="off" class="layui-input" lay-data="{field:'itemname'}" >
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">工程编号</label>
+                    <div class="layui-input-block">
+                      <input id="inum" type="text" name="num" style="width: 240px"  placeholder="输入修改的工程编号" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">工程描述</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="descript" style="width: 240px"  placeholder="请输入工程描述" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item" align = "center">
+                      <a class="layui-btn" lay-submit lay-filter="save" return false;>保存</a>
+                  </div>
+                </form> 
+              </div>
+          </div>
+        </div>
+        <!-- 第二部分 -->
+        <div class="layui-body add_div">
+          <!-- 内容主体区域 -->
+          <div style="padding: 15px;">
+              <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+                <legend>添加项目</legend>
+              </fieldset>
+              <form class="layui-form layui-form-pane">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">选择工程</label>
+                  <div class="layui-input-block">
+                    <select id="select_pro" lay-search lay-case lay-filter='proname'>
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+              <button  id="add" type="button"  class="layui-btn layui-btn-radius">添加项目</button> <!--onclick="add_items()"-->
+          </div>
+          <div id="add-main" style="display: none;" lay-filter="add_msg">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>当前工程</legend>
+            </fieldset>
+            <form class="layui-form" id="add-form" >
+              
+              <div class="layui-form-item center" >
+                <label class="layui-form-label" style="width: 100px" >项目名称</label>
+                <div class="layui-input-block">
+                  <input type="text" name="itemname" required value="" style="width: 240px"  lay-verify="required" placeholder="项目名称" autocomplete="off" class="layui-input" lay-data="{field:'itemname'}" >
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px">持续时间</label>
+                <div class="layui-input-block">
+                  <input type="text" name="last" style="width: 240px"  placeholder="请输入持续时间2" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px">描述&emsp;</label>
+                <div class="layui-input-block">
+                  <input lay-data="{field:'idescript'}" type="text" name="itemdescript" required  style="width: 240px" lay-verify="required" placeholder="请输入项目描述" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                    <div class="layui-block">
+                        <label class="layui-form-label" style="margin-right: 20px;">紧前工作</label>
+                        <div class="layui-input-inline">
+                            <select name="pre" multiple lay-search id="pre">
+                                <option value="">请选择紧前工作</option>
+                            </select>
+                        </div>
+                    </div>
+              </div>
+              <div class="layui-form-item" align = "center">
+                  <a class="layui-btn" lay-submit lay-filter="*" return false;>立即提交</a>
+              </div>
+              
+            </form>  
+			
+          </div>
+          <div id="btn">
+              <a id="bui" class="layui-btn">生成</a>
+          </div>
+        </div>
+        <!-- 第三部分 -->
+        <div class="layui-body">
+            <div style="padding: 15px;">
+                <div class="layui-table-box" id="finish">
+                    <div class="layui-table-header">
+                        <table cellspacing="0" cellpadding="0" border="0" class="layui-table" >
+                          <thead>
+                            <tr>
+                              <th>
+                                <div class="layui-table-cell" align="center">
+                                  <span>工程名称</span>
+                                </div>
+                              </th>
+                              <th>
+                                <div class="layui-table-cell" align="center">
+                                  <span>工程编号</span>
+                                </div>
+                              </th>
+                              <th>
+                                <div class="layui-table-cell" align="center">
+                                  <span>描述</span>
+                                </div>
+                              </th>
+                              <th>
+                                <div class="layui-table-cell" align="center">
+                                  <span>操作</span>
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                        </table>
+                    </div>
+                    <table cellspacing="0" cellpadding="0" border="0" class="layui-table content">
+                      <tbody id="finish_lis">
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+      </div>
+    </div>
+      <!-- 底部固定区域 -->
+    <div class="layui-footer">
+      madeby © xyhlx- 版权归xyhlx所有
+    </div>
+    </div>
+    <div id="box" style="display: none;">
+        <div id="myDiagramDiv"></div>
+    </div>
+
+    <script src="js/methods.js"></script>
+    <script src="js/data_module.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/go.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <script src="js/public (1).js"></script>
+  <script src="js/CriticalPath.js"></script>
+  
+</body>
+</html>

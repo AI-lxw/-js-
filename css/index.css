@@ -1,0 +1,69 @@
+@charset 'UTF-8';
+table td {
+    text-align: center;
+}
+.layui-logo a{
+    text-decoration: none;
+    color:inherit
+    
+}
+body{
+    background-color: #F2F2F2;
+}
+i.layui-icon{
+    margin-right: 5px;
+}
+.layui-footer{
+    text-align: center;
+}
+.layui-container{
+    background-color: #fff;
+}
+.laytable-cell-1-title{ 
+    width: 236px;
+}
+.laytable-cell-1-tips{ 
+    width: 236px;
+}
+.laytable-cell-1-commentNum{ 
+    width: 236px;
+}
+.laytable-cell-1-3{ 
+    width: 178px;
+}
+
+.layui-layout-body .main .layui-body{
+    display: none;
+}
+.layui-layout-body .main .active{
+    display: block;
+}
+.layui-footer{
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    position: fixed;
+    bottom: 0;
+    border: 1px solid #ccc;
+    margin: auto;
+}
+.layui-table td,.layui-table th {
+    width: 25%;
+}
+.layui-body .layui-table-cell{
+    height: 21px;
+    line-height: 21px;
+}
+.layui-body .layui-table{
+    margin: 0;
+}
+.main .layui-table td,.layui-table th {
+    width: 14.3%;
+}
+#btn{
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+}
